@@ -1,0 +1,115 @@
+{
+  "info": {
+    "name": "Tabby Server API",
+    "description": "Self-hosted Tabby AI coding assistant server API. Set the baseUrl variable to your own instance (default http://localhost:8080) and bearerToken to your registration token.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{bearerToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "bearerToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Completions",
+      "item": [
+        {
+          "name": "Code completion",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/v1/completions", "host": ["{{baseUrl}}"], "path": ["v1", "completions"] },
+            "body": { "mode": "raw", "raw": "{\"language\":\"python\",\"segments\":{\"prefix\":\"def fib(n):\\n\",\"suffix\":\"\"}}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Chat completion (OpenAI-compatible)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/v1/chat/completions", "host": ["{{baseUrl}}"], "path": ["v1", "chat", "completions"] },
+            "body": { "mode": "raw", "raw": "{\"messages\":[{\"role\":\"user\",\"content\":\"Explain this function.\"}],\"stream\":true}" }
+          }
+        },
+        {
+          "name": "Chat completion (legacy alias)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/v1beta/chat/completions", "host": ["{{baseUrl}}"], "path": ["v1beta", "chat", "completions"] },
+            "body": { "mode": "raw", "raw": "{\"messages\":[{\"role\":\"user\",\"content\":\"Explain this function.\"}]}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ingestion",
+      "item": [
+        {
+          "name": "Ingest a document",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/v1beta/ingestion", "host": ["{{baseUrl}}"], "path": ["v1beta", "ingestion"] },
+            "body": { "mode": "raw", "raw": "{\"source\":\"handbook\",\"id\":\"onboarding-1\",\"title\":\"Onboarding\",\"body\":\"...\",\"ttl\":\"180d\"}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Models",
+      "item": [
+        {
+          "name": "List configured models",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/v1beta/models", "host": ["{{baseUrl}}"], "path": ["v1beta", "models"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Server health and configuration",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/v1/health", "host": ["{{baseUrl}}"], "path": ["v1", "health"] }
+          }
+        },
+        {
+          "name": "Server settings",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/v1beta/server_setting", "host": ["{{baseUrl}}"], "path": ["v1beta", "server_setting"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Log a telemetry event",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/v1/events", "host": ["{{baseUrl}}"], "path": ["v1", "events"] },
+            "body": { "mode": "raw", "raw": "{\"type\":\"select\",\"completion_id\":\"cmpl-1\",\"choice_index\":0}" }
+          }
+        }
+      ]
+    }
+  ]
+}

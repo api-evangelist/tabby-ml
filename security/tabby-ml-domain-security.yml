@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + website hosts
+hosts:
+- host: www.tabbyml.com
+  https: true
+  hsts: true
+  hsts_max_age: 31536000
+- host: tabby.tabbyml.com
+  https: true
+  hsts: false
+domains:
+- domain: tabbyml.com
+  dnssec: false
+  caa: []
+  spf: true
+  spf_record: v=spf1 +include:spf.onlarksuite.com -all
+  dmarc: false
+notes: >-
+  Probes captured 2026-07-11. The documented Tabby API is self-hosted, so the
+  live API host is your own instance (default http://localhost:8080) rather than
+  a TabbyML-operated domain; these probes cover the marketing site
+  (www.tabbyml.com) and docs (tabby.tabbyml.com) only. Self-hosted TLS/HSTS is a
+  function of how you expose your own deployment.

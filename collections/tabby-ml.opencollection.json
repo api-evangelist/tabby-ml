@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tabby Server API",
+    "version": "0.17.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Completions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Code completion.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/completions",
+            "body": { "type": "json", "data": "{\"language\":\"python\",\"segments\":{\"prefix\":\"def fib(n):\\n\",\"suffix\":\"\"}}" }
+          },
+          "docs": "Generates code completions for the code around the cursor using RAG over indexed repositories. Returns 501 when no completion model is configured."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Chat completion (OpenAI-compatible).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/chat/completions",
+            "body": { "type": "json", "data": "{\"messages\":[{\"role\":\"user\",\"content\":\"Explain this function.\"}],\"stream\":true}" }
+          },
+          "docs": "OpenAI-compatible chat completions, streamed as Server-Sent Events. Returns 501 when no chat model is configured."
+        },
+        {
+          "info": { "name": "Chat completion (legacy alias).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1beta/chat/completions",
+            "body": { "type": "json", "data": "{\"messages\":[{\"role\":\"user\",\"content\":\"Explain this function.\"}]}" }
+          },
+          "docs": "Backward-compatible alias of POST /v1/chat/completions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ingestion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Ingest a document into the Answer Engine.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1beta/ingestion",
+            "body": { "type": "json", "data": "{\"source\":\"handbook\",\"id\":\"onboarding-1\",\"title\":\"Onboarding\",\"body\":\"...\",\"ttl\":\"180d\"}" }
+          },
+          "docs": "Submits a document for asynchronous indexing into Tabby's knowledge system so it can be cited as context."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List configured models.", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/v1beta/models" },
+          "docs": "Returns the completion and chat models configured on the server."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Server health and configuration.", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/v1/health" },
+          "docs": "Reports completion model, device, chat model, chat device, and webserver settings."
+        },
+        {
+          "info": { "name": "Server settings.", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/v1beta/server_setting" },
+          "docs": "Returns additional server settings."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Log a client telemetry event.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/events",
+            "body": { "type": "json", "data": "{\"type\":\"select\",\"completion_id\":\"cmpl-1\",\"choice_index\":0}" }
+          },
+          "docs": "Logs completion-acceptance and other client telemetry events."
+        }
+      ]
+    }
+  ]
+}

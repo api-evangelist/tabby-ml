@@ -1,0 +1,89 @@
+aid: tabby-ml
+name: Tabby
+review:
+  question: Does Tabby expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Tabby's documented server API is
+    request/response REST over HTTP. Its only streaming behavior is the chat
+    completions endpoint (POST /v1/chat/completions), which streams tokens as
+    Server-Sent Events (SSE) over the same HTTP request - a one-way,
+    server-to-client stream, not a bidirectional WebSocket. SSE on a single POST
+    is not typically modeled as an AsyncAPI channel, and there is no ws:// or
+    wss:// endpoint on Tabby's own server to describe.
+findings:
+  summary: |
+    Tabby does not publish a documented public WebSocket API. Tabby is an
+    open-source, self-hosted AI coding assistant (TabbyML, Apache-2.0). You run
+    the server yourself; it exposes an OpenAPI-documented REST surface (Swagger
+    UI at /swagger-ui, spec at /api-docs/openapi.json, default port 8080) for
+    code completion, chat completions, doc ingestion, models, health, and
+    events. The chat completions endpoint streams responses as Server-Sent
+    Events, but there is no WebSocket (ws:// or wss://) endpoint documented on
+    Tabby's own server as of the review date.
+  openSource: |
+    The core Tabby server is open source (Apache-2.0) and self-hostable via
+    Docker on a consumer-grade GPU or your own cloud (github.com/TabbyML/tabby).
+    It is self-contained - no external DBMS or cloud service is required, and it
+    makes no external calls to third parties. TabbyML also sells hosted
+    Community (free, up to 5 users), Team (19 USD per seat per month, up to 50
+    users), and custom Enterprise plans over the same server API.
+  accessModel: |
+    SELF-HOSTED, per-instance. There is no shared multi-tenant TabbyML API
+    endpoint for the core server; the base URL is your own deployment (default
+    http://localhost:8080). Endpoints authenticate with a Bearer registration
+    token minted by your instance. Completion and chat endpoints return 501 Not
+    Implemented when the corresponding model is not configured.
+  transports:
+    - protocol: REST
+      scheme: http
+      baseURL: http://localhost:8080
+      documented: true
+      note: Self-hosted server API. Replace host/port with your own deployment; front with TLS as desired.
+    - protocol: SSE
+      scheme: http
+      documented: true
+      note: POST /v1/chat/completions streams tokens as Server-Sent Events over the HTTP response. One-way server push, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Tabby's server API as of the review date.
+  endpointsConfirmedRest:
+    - POST http://localhost:8080/v1/completions
+    - POST http://localhost:8080/v1/chat/completions
+    - POST http://localhost:8080/v1beta/chat/completions
+    - POST http://localhost:8080/v1beta/ingestion
+    - GET  http://localhost:8080/v1beta/models
+    - GET  http://localhost:8080/v1/health
+    - GET  http://localhost:8080/v1beta/server_setting
+    - POST http://localhost:8080/v1/events
+sources:
+  - url: https://tabby.tabbyml.com/docs/welcome/
+    type: Documentation
+    note: What Tabby is; self-hosted, open-source, no external DBMS or cloud service.
+  - url: https://deepwiki.com/TabbyML/tabby/3.1-server-implementation-and-http-apis
+    type: Documentation
+    note: Server HTTP API endpoint list, Swagger UI at /swagger-ui, OpenAPI JSON at /api-docs/openapi.json, default port 8080.
+  - url: https://tabby.tabbyml.com/docs/references/models-http-api/openai/
+    type: Documentation
+    note: OpenAI-compatible chat completions surface.
+  - url: https://www.tabbyml.com/blog/doc-ingestion-api
+    type: Documentation
+    note: POST /v1beta/ingestion doc ingestion API and Bearer registration-token auth.
+  - url: https://www.tabbyml.com/pricing
+    type: Pricing
+    note: Community (free, up to 5 users), Team (19 USD/seat/mo, up to 50), Enterprise (custom).
+  - url: https://github.com/TabbyML/tabby
+    type: SourceCode
+    note: Apache-2.0, self-hosted AI coding assistant.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Tabby's own server API is
+    request/response REST, with the chat completions endpoint streaming via
+    Server-Sent Events over HTTP. No AsyncAPI document was created because there
+    is no bidirectional/WebSocket transport on Tabby's own API to model.

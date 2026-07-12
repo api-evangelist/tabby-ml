@@ -1,0 +1,91 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Tabby
+providerId: tabby-ml
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- AI Coding Assistant
+- Code Completion
+- Open Source
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Tabby spend. Tabby's server is open source (Apache-2.0) and free
+  to self-host - in that model there is no vendor invoice at all; the cost is your
+  own compute for running the Tabby server, dominated by the GPU (or CPU) that
+  serves the completion and chat models, plus storage for the indexed knowledge
+  base. Because Tabby makes no external calls to third parties, there are no
+  per-token inference charges to a model vendor. TabbyML's hosted plans convert
+  that owned-infrastructure cost into a predictable per-seat subscription: free
+  Community (up to 5 users), Team at 19 USD per seat per month (up to 50 users),
+  and custom Enterprise.
+notes: >-
+  Self-hosted cost is essentially GPU/CPU time and storage, not a Tabby license
+  fee. Hosted per-seat rates were captured on 2026-07-11; verify on the pricing
+  page. The main optimization lever self-hosted is right-sizing the model and
+  device to your team's latency needs.
+sources:
+- https://www.tabbyml.com/
+- https://www.tabbyml.com/pricing
+- https://github.com/TabbyML/tabby
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: TabbyML
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: Tabby
+  ServiceCategory: AI and Machine Learning
+  ProviderName: TabbyML
+  PublisherName: TabbyML
+  InvoiceIssuerName: TabbyML
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: hosted_seats
+  description: Per-seat subscription on hosted Team plans, billed monthly.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - account
+- name: self_hosted_compute
+  description: GPU/CPU time to run the self-hosted Tabby server (no TabbyML invoice).
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - deployment
+  - device
+- name: index_storage
+  description: Storage for the ingested knowledge base and repository index.
+  unit: bytes
+  aggregation: sum
+  dimensions:
+  - deployment
+principles:
+- name: Visibility
+  description: On self-hosted, track GPU/CPU hours and storage for the Tabby server; on hosted, track active seats against the plan cap.
+- name: Allocation
+  description: Map self-hosted Tabby infrastructure to the team(s) it serves, or allocate hosted seats per developer/team.
+- name: Optimization
+  description: Right-size the model and device to your latency needs; self-host to avoid per-seat fees when you have spare GPU capacity, or use hosted plans to avoid running infrastructure.
+- name: Accountability
+  description: Assign an owner for the Tabby deployment and review monthly compute/storage cost or seat count against team growth.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

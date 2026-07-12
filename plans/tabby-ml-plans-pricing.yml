@@ -1,0 +1,127 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Tabby
+providerId: tabby-ml
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- AI Coding Assistant
+- Code Completion
+- Open Source
+- Developer Tools
+- Plans
+description: >-
+  Tabby has two consumption models. The core Tabby server is open source
+  (Apache-2.0) and completely free to self-host - there are no per-request or
+  per-token API fees, no usage limits, and no external calls to third parties;
+  your only cost is the infrastructure (CPU or GPU) you run it on. TabbyML also
+  sells hosted / managed plans: a free Community tier for up to 5 users, a Team
+  tier at 19 US dollars per seat per month for up to 50 users, and a custom
+  Enterprise tier for unlimited users with enhanced security and group
+  management. All tiers expose the same self-hostable server API surface.
+notes: >-
+  Pricing captured from the Tabby pricing page on 2026-07-11 and should be
+  verified during reconciliation. The self-hosted open-source server has no
+  vendor invoice; hosted Team/Enterprise plans add managed hosting,
+  administration, and support on top of the same API.
+sources:
+- https://www.tabbyml.com/pricing
+- https://www.tabbyml.com/
+- https://github.com/TabbyML/tabby
+plans:
+- id: tabby-open-source
+  name: Open Source (Self-Hosted)
+  type: free
+  description: >-
+    The full Tabby server, Apache-2.0 licensed and self-hostable via Docker on a
+    consumer-grade GPU or your own cloud. Includes code completion, chat
+    completions, the Answer Engine with doc ingestion, model registry, health,
+    and events endpoints. No API fees, no usage limits; you provide the
+    infrastructure.
+  entries:
+  - label: Self-Hosted Usage
+    name: self_hosted_usage
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (self-hosted; you provide infrastructure)
+    userMultiplied: false
+  elements:
+  - name: Code Completion API
+  - name: Chat Completions API
+  - name: Answer Engine and Doc Ingestion
+  - name: Models, Health, and Events APIs
+  - name: No External Third-Party Calls
+- id: tabby-community
+  name: Community (Hosted)
+  type: free
+  description: >-
+    Free managed tier for up to 5 users with local-first deployment. Includes
+    code completion, Answer Engine, in-line chat, and context provider.
+  entries:
+  - label: Included Users
+    name: community_users
+    type: unit
+    metric: users
+    limit: 5
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free up to 5 users
+    userMultiplied: false
+  elements:
+  - name: Code Completion
+  - name: Answer Engine
+  - name: In-line Chat
+  - name: Context Provider
+- id: tabby-team
+  name: Team (Hosted)
+  type: paid
+  description: >-
+    Managed tier for larger and growing development teams, up to 50 users, with
+    flexible deployment. Billed per seat.
+  entries:
+  - label: Per Seat
+    name: team_seat
+    type: flat
+    metric: seats
+    limit: 50
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 19 USD per seat per month
+    userMultiplied: true
+  elements:
+  - name: Flexible Deployment
+  - name: Team Administration
+  - name: Everything in Community
+- id: tabby-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom plan for unlimited users with customized deployment, enhanced
+    security, and group management. Contact TabbyML for pricing.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Unlimited Users
+  - name: Enhanced Security
+  - name: Group Management
+  - name: Customized Deployment
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

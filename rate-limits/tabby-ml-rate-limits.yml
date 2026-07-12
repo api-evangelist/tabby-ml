@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Tabby
+providerId: tabby-ml
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- AI Coding Assistant
+- Code Completion
+- Open Source
+- Rate Limiting
+- Quotas
+description: >-
+  Tabby does not publish fixed numeric API rate limits. Because the server is
+  self-hosted, throughput is bounded by your own hardware - primarily the GPU (or
+  CPU) serving the completion and chat models - rather than by a vendor-imposed
+  per-minute request cap. Completion latency and tokens-per-second depend on the
+  model size and device you configure. On hosted Team and Enterprise plans,
+  capacity is governed by seat count and the managed infrastructure rather than a
+  documented request-rate limit.
+notes: >-
+  No per-account or per-endpoint numeric limits are documented as of the review
+  date. Tune performance by choosing an appropriately sized model and device, and
+  scale horizontally by running additional Tabby instances behind a load
+  balancer. Completion and chat endpoints return 501 when the corresponding model
+  is not configured.
+sources:
+- https://tabby.tabbyml.com/docs/welcome/
+- https://www.tabbyml.com/pricing
+- https://github.com/TabbyML/tabby
+responseCodes:
+  notImplemented: 501
+limits:
+- name: Completion / Chat Throughput
+  scope: deployment
+  metric: requests
+  limit: hardware-bound
+  notes: Constrained by your own GPU/CPU and the configured model, not by TabbyML.
+- name: API Request Rate
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the server API.
+- name: Doc Ingestion
+  scope: deployment
+  metric: documents
+  limit: not published
+  notes: Documents are indexed asynchronously; throughput depends on your indexing resources.
+- name: Hosted Seats
+  scope: account
+  metric: users
+  limit: per plan
+  notes: Community up to 5 users; Team up to 50 users; Enterprise unlimited.
+policies:
+- name: Self-Hosted Scaling
+  description: Scale by selecting a larger device/model or running multiple Tabby instances behind a load balancer.
+- name: Model Not Configured
+  description: Completion and chat endpoints return 501 Not Implemented when their model is not configured, rather than throttling.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter when the server is saturated on constrained hardware.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

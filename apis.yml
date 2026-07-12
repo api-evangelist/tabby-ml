@@ -1,0 +1,172 @@
+aid: tabby-ml
+url: https://raw.githubusercontent.com/api-evangelist/tabby-ml/refs/heads/main/apis.yml
+name: Tabby
+kind: company
+description: Tabby is an open-source, self-hosted AI coding assistant - a
+  privacy-first alternative to GitHub Copilot from TabbyML (Apache-2.0). You run
+  the Tabby server yourself (Docker, a consumer-grade GPU, or your own cloud);
+  there is no shared multi-tenant API and no external calls to third parties. The
+  server exposes an OpenAPI-documented REST surface (Swagger UI at /swagger-ui,
+  spec at /api-docs/openapi.json) for code completion, OpenAI-compatible chat
+  completions, an Answer Engine backed by a doc-ingestion knowledge base, health,
+  model registry, and telemetry events. Because it is self-hosted, the base URL
+  is your own instance (default http://localhost:8080). TabbyML also offers hosted
+  Team and Enterprise plans.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI Coding Assistant
+- Code Completion
+- Open Source
+- Developer Tools
+- LLM
+- AI
+- Self-Hosted
+- Code Generation
+- Copilot Alternative
+created: '2026-07-11'
+modified: '2026-07-11'
+specificationVersion: '0.19'
+apis:
+- aid: tabby-ml:tabby-ml-code-completions-api
+  name: Tabby Code Completions API
+  tags:
+  - Code Completion
+  - Completions
+  - AI Coding Assistant
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://tabby.tabbyml.com/docs/api/
+  baseURL: http://localhost:8080
+  properties:
+  - url: https://tabby.tabbyml.com/docs/welcome/
+    type: Documentation
+  - url: https://tabby.tabbyml.com/api/
+    type: APIReference
+  - url: openapi/tabby-ml-openapi.yml
+    type: OpenAPI
+  - url: collections/tabby-ml.opencollection.json
+    type: OpenCollection
+  - url: collections/tabby-ml.postman_collection.json
+    type: PostmanCollection
+  description: 'POST /v1/completions - the core code-completion endpoint that powers
+    Tabby''s IDE plugins. Takes a language and code segments (prefix/suffix around
+    the cursor), applies retrieval-augmented generation against your indexed
+    repositories, and returns ranked completion choices. Served by your own
+    self-hosted Tabby instance; returns 501 when no completion model is configured.'
+- aid: tabby-ml:tabby-ml-chat-completions-api
+  name: Tabby Chat Completions API
+  tags:
+  - Chat
+  - Completions
+  - LLM
+  - OpenAI Compatible
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://tabby.tabbyml.com/docs/references/models-http-api/openai/
+  baseURL: http://localhost:8080
+  properties:
+  - url: https://tabby.tabbyml.com/docs/administration/answer-engine/
+    type: Documentation
+  - url: https://tabby.tabbyml.com/api/
+    type: APIReference
+  - url: openapi/tabby-ml-openapi.yml
+    type: OpenAPI
+  description: 'POST /v1/chat/completions - an OpenAI-compatible chat completions
+    endpoint (with a legacy /v1beta/chat/completions alias) that streams responses
+    as Server-Sent Events. Powers Tabby''s inline chat and Answer Engine, and lets
+    OpenAI-style SDKs point at your Tabby server. Returns 501 when no chat model is
+    configured.'
+- aid: tabby-ml:tabby-ml-answer-engine-ingestion-api
+  name: Tabby Doc Ingestion API
+  tags:
+  - Answer Engine
+  - Knowledge Base
+  - RAG
+  - Search
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.tabbyml.com/blog/doc-ingestion-api
+  baseURL: http://localhost:8080
+  properties:
+  - url: https://www.tabbyml.com/blog/doc-ingestion-api
+    type: Documentation
+  - url: openapi/tabby-ml-openapi.yml
+    type: OpenAPI
+  description: 'POST /v1beta/ingestion - feed your own materials (project docs,
+    technical articles, internal knowledge base entries) into Tabby''s knowledge
+    system. Documents are grouped by source, indexed asynchronously, and surfaced
+    as cited context in Answer Engine responses. Supports an optional ttl expiry
+    and deletion by source or id.'
+- aid: tabby-ml:tabby-ml-models-api
+  name: Tabby Models API
+  tags:
+  - Models
+  - Registry
+  - Catalog
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://tabby.tabbyml.com/api/
+  baseURL: http://localhost:8080
+  properties:
+  - url: https://tabby.tabbyml.com/docs/references/models-http-api/openai/
+    type: Documentation
+  - url: openapi/tabby-ml-openapi.yml
+    type: OpenAPI
+  description: 'GET /v1beta/models - returns the model registry configured on the
+    Tabby server, listing the completion and chat models currently loaded and
+    available to clients.'
+- aid: tabby-ml:tabby-ml-health-api
+  name: Tabby Health API
+  tags:
+  - Health
+  - Status
+  - Monitoring
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://tabby.tabbyml.com/api/
+  baseURL: http://localhost:8080
+  properties:
+  - url: https://tabby.tabbyml.com/docs/welcome/
+    type: Documentation
+  - url: openapi/tabby-ml-openapi.yml
+    type: OpenAPI
+  description: 'GET /v1/health - reports the server''s runtime configuration and
+    readiness, including the completion model, device, chat model, chat device,
+    and webserver settings. Used by IDE clients and orchestration to confirm the
+    instance is up. GET /v1beta/server_setting exposes additional server settings.'
+- aid: tabby-ml:tabby-ml-events-telemetry-api
+  name: Tabby Events API
+  tags:
+  - Events
+  - Telemetry
+  - Logging
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://tabby.tabbyml.com/api/
+  baseURL: http://localhost:8080
+  properties:
+  - url: https://tabby.tabbyml.com/docs/welcome/
+    type: Documentation
+  - url: openapi/tabby-ml-openapi.yml
+    type: OpenAPI
+  description: 'POST /v1/events - logs completion-acceptance and other client
+    telemetry events (LogEventRequest) so a self-hosted deployment can measure
+    suggestion quality and usage locally, without sending data to any third party.'
+common:
+- type: DomainSecurity
+  url: security/tabby-ml-domain-security.yml
+- type: Authentication
+  url: authentication/tabby-ml-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/TabbyML
+- type: LinkedIn
+  url: https://www.linkedin.com/company/tabbyml
+- type: Website
+  url: https://www.tabbyml.com
+- type: Documentation
+  url: https://tabby.tabbyml.com/docs/welcome/
+- type: Plans
+  url: plans/tabby-ml-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/tabby-ml-rate-limits.yml
+- type: FinOps
+  url: finops/tabby-ml-finops.yml
+- url: https://www.tabbyml.com/blog
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
