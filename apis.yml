@@ -147,6 +147,8 @@ apis:
     telemetry events (LogEventRequest) so a self-hosted deployment can measure
     suggestion quality and usage locally, without sending data to any third party.'
 common:
+- type: AgenticAccess
+  url: agentic-access/tabby-ml-agentic-access.yml
 - type: DomainSecurity
   url: security/tabby-ml-domain-security.yml
 - type: Authentication
