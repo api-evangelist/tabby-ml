@@ -10,7 +10,7 @@ schemes:
   scheme: bearer
   description: 'Bearer token authentication. Tabby uses a registration token from the
     self-hosted web UI (Information -> System -> Registration token), passed as `Authorization:
-    Bearer YOUR_TOKEN`. Because Tabby is self-hosted, tokens are minted by your own
+    Bearer [example key]`. Because Tabby is self-hosted, tokens are minted by your own
     instance rather than a central vendor console.'
   sources:
   - openapi/tabby-ml-openapi.yml
