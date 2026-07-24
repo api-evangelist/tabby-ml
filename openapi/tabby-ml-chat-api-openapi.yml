@@ -1,0 +1,126 @@
+openapi: 3.0.3
+info:
+  title: Tabby Server Chat API
+  description: Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML. You run the Tabby server yourself; it exposes an OpenAPI-documented REST surface for code completion, OpenAI-compatible chat completions, an Answer Engine backed by a doc-ingestion knowledge base, health, the model registry, and telemetry events. The interactive Swagger UI is served at /swagger-ui and the raw spec at /api-docs/openapi.json on your own instance. Because Tabby is self-hosted, the server URL below is a placeholder for your own deployment (default port 8080); replace it with your instance host. Endpoints authenticate with a Bearer registration token. Completion and chat endpoints return 501 Not Implemented when the corresponding model is not configured.
+  version: 0.17.0
+  contact:
+    name: TabbyML
+    url: https://www.tabbyml.com
+  license:
+    name: Apache-2.0
+    url: https://github.com/TabbyML/tabby/blob/main/LICENSE
+servers:
+- url: http://localhost:8080
+  description: Self-hosted Tabby instance (default). Replace host and port with your own deployment.
+security:
+- bearerAuth: []
+tags:
+- name: Chat
+  description: OpenAI-compatible chat completions and inline chat / Answer Engine.
+paths:
+  /v1/chat/completions:
+    post:
+      operationId: chatCompletions
+      tags:
+      - Chat
+      summary: Chat completion (OpenAI-compatible)
+      description: OpenAI-compatible chat completions. Streams responses as Server-Sent Events. Powers Tabby's inline chat and Answer Engine. Returns 501 when no chat model is configured.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionRequest'
+      responses:
+        '200':
+          description: A stream of chat completion chunks (text/event-stream) or a JSON completion.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '501':
+          description: No chat model configured.
+  /v1beta/chat/completions:
+    post:
+      operationId: chatCompletionsBeta
+      tags:
+      - Chat
+      summary: Chat completion (legacy alias)
+      description: Backward-compatible alias of POST /v1/chat/completions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionRequest'
+      responses:
+        '200':
+          description: A stream of chat completion chunks (text/event-stream) or a JSON completion.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '501':
+          description: No chat model configured.
+components:
+  schemas:
+    ChatMessage:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+        content:
+          type: string
+      required:
+      - role
+      - content
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/ChatMessage'
+    ChatCompletionRequest:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        model:
+          type: string
+        stream:
+          type: boolean
+          default: true
+        temperature:
+          type: number
+          format: float
+      required:
+      - messages
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token authentication. Use the registration token from the Tabby web UI (Information -> System -> Registration token), passed as `Authorization: Bearer YOUR_TOKEN`.'

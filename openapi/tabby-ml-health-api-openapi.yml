@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: Tabby Server Chat Health API
+  description: Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML. You run the Tabby server yourself; it exposes an OpenAPI-documented REST surface for code completion, OpenAI-compatible chat completions, an Answer Engine backed by a doc-ingestion knowledge base, health, the model registry, and telemetry events. The interactive Swagger UI is served at /swagger-ui and the raw spec at /api-docs/openapi.json on your own instance. Because Tabby is self-hosted, the server URL below is a placeholder for your own deployment (default port 8080); replace it with your instance host. Endpoints authenticate with a Bearer registration token. Completion and chat endpoints return 501 Not Implemented when the corresponding model is not configured.
+  version: 0.17.0
+  contact:
+    name: TabbyML
+    url: https://www.tabbyml.com
+  license:
+    name: Apache-2.0
+    url: https://github.com/TabbyML/tabby/blob/main/LICENSE
+servers:
+- url: http://localhost:8080
+  description: Self-hosted Tabby instance (default). Replace host and port with your own deployment.
+security:
+- bearerAuth: []
+tags:
+- name: Health
+  description: Server health and settings.
+paths:
+  /v1/health:
+    get:
+      operationId: health
+      tags:
+      - Health
+      summary: Server health and configuration
+      description: Reports the server's runtime configuration and readiness - completion model, device, chat model, chat device, and webserver settings.
+      responses:
+        '200':
+          description: Health and configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthState'
+  /v1beta/server_setting:
+    get:
+      operationId: serverSetting
+      tags:
+      - Health
+      summary: Server settings
+      description: Returns additional server settings. Always available on OSS builds; on Enterprise builds available only when the webserver is disabled.
+      responses:
+        '200':
+          description: Server settings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerSetting'
+components:
+  schemas:
+    ServerSetting:
+      type: object
+      properties:
+        disable_client_side_telemetry:
+          type: boolean
+    HealthState:
+      type: object
+      properties:
+        model:
+          type: string
+        device:
+          type: string
+        chat_model:
+          type: string
+        chat_device:
+          type: string
+        webserver:
+          type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token authentication. Use the registration token from the Tabby web UI (Information -> System -> Registration token), passed as `Authorization: Bearer YOUR_TOKEN`.'

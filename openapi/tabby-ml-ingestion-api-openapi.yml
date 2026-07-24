@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Tabby Server Chat Ingestion API
+  description: Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML. You run the Tabby server yourself; it exposes an OpenAPI-documented REST surface for code completion, OpenAI-compatible chat completions, an Answer Engine backed by a doc-ingestion knowledge base, health, the model registry, and telemetry events. The interactive Swagger UI is served at /swagger-ui and the raw spec at /api-docs/openapi.json on your own instance. Because Tabby is self-hosted, the server URL below is a placeholder for your own deployment (default port 8080); replace it with your instance host. Endpoints authenticate with a Bearer registration token. Completion and chat endpoints return 501 Not Implemented when the corresponding model is not configured.
+  version: 0.17.0
+  contact:
+    name: TabbyML
+    url: https://www.tabbyml.com
+  license:
+    name: Apache-2.0
+    url: https://github.com/TabbyML/tabby/blob/main/LICENSE
+servers:
+- url: http://localhost:8080
+  description: Self-hosted Tabby instance (default). Replace host and port with your own deployment.
+security:
+- bearerAuth: []
+tags:
+- name: Ingestion
+  description: Doc ingestion into the Answer Engine knowledge base.
+paths:
+  /v1beta/ingestion:
+    post:
+      operationId: ingestion
+      tags:
+      - Ingestion
+      summary: Ingest a document into the Answer Engine
+      description: Submit a document to be indexed asynchronously into Tabby's knowledge system so it can be cited as context during code assistance. Documents are grouped by source and can carry an optional time-to-live (ttl).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestionRequest'
+      responses:
+        '200':
+          description: Ingestion accepted and queued for indexing.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+  schemas:
+    IngestionRequest:
+      type: object
+      properties:
+        source:
+          type: string
+          description: Logical group the document belongs to.
+        id:
+          type: string
+          description: Unique identifier for the document within its source.
+        title:
+          type: string
+        body:
+          type: string
+          description: Document content.
+        link:
+          type: string
+          description: Optional URL reference.
+        ttl:
+          type: string
+          description: Optional expiry window, e.g. "180d".
+      required:
+      - source
+      - id
+      - body
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token authentication. Use the registration token from the Tabby web UI (Information -> System -> Registration token), passed as `Authorization: Bearer YOUR_TOKEN`.'

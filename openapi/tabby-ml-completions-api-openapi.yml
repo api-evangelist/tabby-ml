@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Tabby Server Chat Completions API
+  description: Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML. You run the Tabby server yourself; it exposes an OpenAPI-documented REST surface for code completion, OpenAI-compatible chat completions, an Answer Engine backed by a doc-ingestion knowledge base, health, the model registry, and telemetry events. The interactive Swagger UI is served at /swagger-ui and the raw spec at /api-docs/openapi.json on your own instance. Because Tabby is self-hosted, the server URL below is a placeholder for your own deployment (default port 8080); replace it with your instance host. Endpoints authenticate with a Bearer registration token. Completion and chat endpoints return 501 Not Implemented when the corresponding model is not configured.
+  version: 0.17.0
+  contact:
+    name: TabbyML
+    url: https://www.tabbyml.com
+  license:
+    name: Apache-2.0
+    url: https://github.com/TabbyML/tabby/blob/main/LICENSE
+servers:
+- url: http://localhost:8080
+  description: Self-hosted Tabby instance (default). Replace host and port with your own deployment.
+security:
+- bearerAuth: []
+tags:
+- name: Completions
+  description: Code completion endpoint powering Tabby's IDE plugins.
+paths:
+  /v1/completions:
+    post:
+      operationId: completion
+      tags:
+      - Completions
+      summary: Code completion
+      description: Generates code completions for the code around the cursor. Accepts the language and code segments (prefix and suffix), applies retrieval-augmented generation over indexed repositories, and returns ranked completion choices. Returns 501 when no completion model is configured.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletionRequest'
+      responses:
+        '200':
+          description: Completion choices.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompletionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '501':
+          description: No completion model configured.
+components:
+  schemas:
+    Segments:
+      type: object
+      properties:
+        prefix:
+          type: string
+          description: Code before the cursor.
+        suffix:
+          type: string
+          description: Code after the cursor.
+        filepath:
+          type: string
+          description: Path of the file being edited.
+      required:
+      - prefix
+    CompletionRequest:
+      type: object
+      properties:
+        language:
+          type: string
+          description: Programming language identifier (e.g. python, rust, typescript).
+          example: python
+        segments:
+          $ref: '#/components/schemas/Segments'
+        user:
+          type: string
+          description: Optional opaque user identifier for telemetry.
+        temperature:
+          type: number
+          format: float
+          description: Optional sampling temperature.
+    CompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              text:
+                type: string
+        debug_data:
+          type: object
+          description: Optional debug metadata (prompt, snippets) when debug is enabled.
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token authentication. Use the registration token from the Tabby web UI (Information -> System -> Registration token), passed as `Authorization: Bearer YOUR_TOKEN`.'
