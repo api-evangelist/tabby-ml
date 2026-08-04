@@ -1,0 +1,24 @@
+{
+  "provider": "tabby-ml",
+  "sources": [
+    "tabby-ml-chat-api-openapi.yml",
+    "tabby-ml-completions-api-openapi.yml",
+    "tabby-ml-events-api-openapi.yml",
+    "tabby-ml-health-api-openapi.yml",
+    "tabby-ml-ingestion-api-openapi.yml",
+    "tabby-ml-models-api-openapi.yml"
+  ],
+  "outputs": [
+    "tabby-ml-chat-api-openapi.yml",
+    "tabby-ml-completions-api-openapi.yml",
+    "tabby-ml-events-api-openapi.yml",
+    "tabby-ml-health-api-openapi.yml",
+    "tabby-ml-ingestion-api-openapi.yml",
+    "tabby-ml-models-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
