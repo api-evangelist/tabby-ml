@@ -1,0 +1,238 @@
+{
+  "item": [
+    {
+      "id": "34ab6378-377a-41af-a90e-8e8f3cd6c8ec",
+      "name": "Completions",
+      "description": {
+        "content": "Code completion endpoint powering Tabby's IDE plugins.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a543d828-4ed6-48a1-80be-e9a2cdb65c63",
+          "name": "Code completion",
+          "request": {
+            "name": "Code completion",
+            "description": {
+              "content": "Generates code completions for the code around the cursor. Accepts the language and code segments (prefix and suffix), applies retrieval-augmented generation over indexed repositories, and returns ranked completion choices. Returns 501 when no completion model is configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"<string>\",\n  \"segments\": {\n    \"prefix\": \"<string>\",\n    \"suffix\": \"<string>\",\n    \"filepath\": \"<string>\"\n  },\n  \"user\": \"<string>\",\n  \"temperature\": \"<float>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e56dc0ad-ecf0-450b-85c2-440411403be8",
+              "name": "Completion choices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"python\",\n  \"segments\": {\n    \"prefix\": \"<string>\",\n    \"suffix\": \"<string>\",\n    \"filepath\": \"<string>\"\n  },\n  \"user\": \"<string>\",\n  \"temperature\": \"<float>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"choices\": [\n    {\n      \"index\": 1349,\n      \"text\": \"string\"\n    },\n    {\n      \"index\": 4324,\n      \"text\": \"string\"\n    }\n  ],\n  \"debug_data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6285c6a2-7d00-4810-b512-5a495addfc50",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"python\",\n  \"segments\": {\n    \"prefix\": \"<string>\",\n    \"suffix\": \"<string>\",\n    \"filepath\": \"<string>\"\n  },\n  \"user\": \"<string>\",\n  \"temperature\": \"<float>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a515eb36-ef34-4efc-a173-549e75fae798",
+              "name": "No completion model configured.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"python\",\n  \"segments\": {\n    \"prefix\": \"<string>\",\n    \"suffix\": \"<string>\",\n    \"filepath\": \"<string>\"\n  },\n  \"user\": \"<string>\",\n  \"temperature\": \"<float>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c14417b0-4b50-4427-a825-397ce1e612a5",
+    "name": "Tabby Server Chat Completions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML. You run the Tabby server yourself; it exposes an OpenAPI-documented REST surface for code completion, OpenAI-compatible chat completions, an Answer Engine backed by a doc-ingestion knowledge base, health, the model registry, and telemetry events. The interactive Swagger UI is served at /swagger-ui and the raw spec at /api-docs/openapi.json on your own instance. Because Tabby is self-hosted, the server URL below is a placeholder for your own deployment (default port 8080); replace it with your instance host. Endpoints authenticate with a Bearer registration token. Completion and chat endpoints return 501 Not Implemented when the corresponding model is not configured.\n\nContact Support:\n Name: TabbyML",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "cbad7bb5-2e0d-4ce4-b961-4fa6001eb766",
+      "name": "Events",
+      "description": {
+        "content": "Client telemetry event logging.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4380670b-d048-4e8d-97e9-bb42531382f0",
+          "name": "Log a client telemetry event",
+          "request": {
+            "name": "Log a client telemetry event",
+            "description": {
+              "content": "Logs completion-acceptance and other client telemetry events so a self-hosted deployment can measure suggestion quality locally.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"completion_id\": \"<string>\",\n  \"choice_index\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62f585b3-daae-4129-a43b-e94c79345e71",
+              "name": "Event recorded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"completion_id\": \"<string>\",\n  \"choice_index\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5eb461f4-9973-48a2-aa03-761660be03b4",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"completion_id\": \"<string>\",\n  \"choice_index\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2ed38b3a-6c8c-469b-ab9d-a16e3d7df363",
+    "name": "Tabby Server Chat Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML. You run the Tabby server yourself; it exposes an OpenAPI-documented REST surface for code completion, OpenAI-compatible chat completions, an Answer Engine backed by a doc-ingestion knowledge base, health, the model registry, and telemetry events. The interactive Swagger UI is served at /swagger-ui and the raw spec at /api-docs/openapi.json on your own instance. Because Tabby is self-hosted, the server URL below is a placeholder for your own deployment (default port 8080); replace it with your instance host. Endpoints authenticate with a Bearer registration token. Completion and chat endpoints return 501 Not Implemented when the corresponding model is not configured.\n\nContact Support:\n Name: TabbyML",
+      "type": "text/plain"
+    }
+  }
+}

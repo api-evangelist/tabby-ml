@@ -1,0 +1,161 @@
+{
+  "item": [
+    {
+      "id": "a1e95eed-5783-4fc0-a06f-a53f0bcb246e",
+      "name": "Models",
+      "description": {
+        "content": "Model registry configured on the server.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52298583-65a2-4ebd-a263-39558d978c1e",
+          "name": "List configured models",
+          "request": {
+            "name": "List configured models",
+            "description": {
+              "content": "Returns the model registry configured on the server (completion and chat models).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1beta",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f4ddde9-db35-4a31-adf1-306e10663efa",
+              "name": "The configured model registry.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"completion\": [\n    \"string\",\n    \"string\"\n  ],\n  \"chat\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42334719-2bd7-44f3-992e-a5b18c04b51a",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1beta",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ad515e29-ea70-4250-8457-0cffc302d037",
+    "name": "Tabby Server Chat Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML. You run the Tabby server yourself; it exposes an OpenAPI-documented REST surface for code completion, OpenAI-compatible chat completions, an Answer Engine backed by a doc-ingestion knowledge base, health, the model registry, and telemetry events. The interactive Swagger UI is served at /swagger-ui and the raw spec at /api-docs/openapi.json on your own instance. Because Tabby is self-hosted, the server URL below is a placeholder for your own deployment (default port 8080); replace it with your instance host. Endpoints authenticate with a Bearer registration token. Completion and chat endpoints return 501 Not Implemented when the corresponding model is not configured.\n\nContact Support:\n Name: TabbyML",
+      "type": "text/plain"
+    }
+  }
+}

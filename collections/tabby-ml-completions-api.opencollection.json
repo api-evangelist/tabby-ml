@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tabby Server Chat Completions API",
+    "version": "0.17.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Completions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Code completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/v1/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates code completions for the code around the cursor. Accepts the language and code segments (prefix and suffix), applies retrieval-augmented generation over indexed repositories, and returns ranked completion choices. Returns 501 when no completion model is configured."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tabby Server Chat Health API",
+    "version": "0.17.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Server health and configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/v1/health"
+          },
+          "docs": "Reports the server's runtime configuration and readiness - completion model, device, chat model, chat device, and webserver settings."
+        },
+        {
+          "info": {
+            "name": "Server settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/v1beta/server_setting"
+          },
+          "docs": "Returns additional server settings. Always available on OSS builds; on Enterprise builds available only when the webserver is disabled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
