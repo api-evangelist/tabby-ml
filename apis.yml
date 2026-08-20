@@ -29,6 +29,16 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tabby-ml.p
 tags:
 - AI Coding Assistant
 - Code Completion
+- Open-Source
+- Developer Tools
+- LLM
+- Artificial Intelligence
+- Self-Hosted
+- Code Generation
+- Copilot Alternative
+tags_raw:
+- AI Coding Assistant
+- Code Completion
 - Open Source
 - Developer Tools
 - LLM
@@ -94,6 +104,8 @@ apis:
   humanURL: https://tabby.tabbyml.com/docs/api/
   baseURL: http://localhost:8080
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
