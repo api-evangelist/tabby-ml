@@ -12,6 +12,18 @@ description: Tabby is an open-source, self-hosted AI coding assistant - a
   model registry, and telemetry events. Because it is self-hosted, the base URL
   is your own instance (default http://localhost:8080). TabbyML also offers hosted
   Team and Enterprise plans.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
