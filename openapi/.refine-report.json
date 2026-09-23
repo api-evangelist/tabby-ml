@@ -1,12 +1,7 @@
 {
   "provider": "tabby-ml",
   "sources": [
-    "tabby-ml-chat-api-openapi.yml",
-    "tabby-ml-completions-api-openapi.yml",
-    "tabby-ml-events-api-openapi.yml",
-    "tabby-ml-health-api-openapi.yml",
-    "tabby-ml-ingestion-api-openapi.yml",
-    "tabby-ml-models-api-openapi.yml"
+    "_original/tabby-ml-openapi.yml"
   ],
   "outputs": [
     "tabby-ml-chat-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tabby-ml-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tabby-ml-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tabby-ml-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tabby-ml-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tabby-ml-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tabby-ml-ingestion-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tabby-ml-models-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tabby Server Chat Models API
-  description: Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML. You run the Tabby server yourself; it exposes an OpenAPI-documented REST surface for code completion, OpenAI-compatible chat completions, an Answer Engine backed by a doc-ingestion knowledge base, health, the model registry, and telemetry events. The interactive Swagger UI is served at /swagger-ui and the raw spec at /api-docs/openapi.json on your own instance. Because Tabby is self-hosted, the server URL below is a placeholder for your own deployment (default port 8080); replace it with your instance host. Endpoints authenticate with a Bearer registration token. Completion and chat endpoints return 501 Not Implemented when the corresponding model is not configured.
+  title: Tabby Server Models API
+  description: Tabby is an open-source, self-hosted AI coding assistant (Apache-2.0) from TabbyML.
   version: 0.17.0
   contact:
     name: TabbyML

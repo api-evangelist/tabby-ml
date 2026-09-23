@@ -1,0 +1,27 @@
+# Front Door AI Index — tabby-ml — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: tabby-ml
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.tabbyml.com
+  final_host: www.tabbyml.com
+  ownership: own
+  owner: tabby-ml
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 23
+  host_score: 23
+  density: 14.81
+  words: 1553
+  tiers:
+    agentic: 2
+    core: 21
+    model: 0
+  ambiguous: 1
+  top_terms:
+    AI: 21
+    copilot: 2
+    agent: 1
