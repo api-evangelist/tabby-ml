@@ -70,21 +70,10 @@ paths:
         '501':
           description: No chat model configured.
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
   schemas:
-    ChatCompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        choices:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              message:
-                $ref: '#/components/schemas/ChatMessage'
     ChatMessage:
       type: object
       properties:
@@ -116,9 +105,20 @@ components:
           format: float
       required:
       - messages
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/ChatMessage'
   securitySchemes:
     bearerAuth:
       type: http

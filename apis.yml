@@ -43,7 +43,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tabby-ml.p
 tags:
 - AI Coding Assistant
 - Code Completion
-- Open-Source
+- Open Source
 - Developer Tools
 - LLM
 - Artificial Intelligence
@@ -60,6 +60,7 @@ tags_raw:
 - Self-Hosted
 - Code Generation
 - Copilot Alternative
+- Open-Source
 created: '2026-07-11'
 modified: '2026-07-11'
 specificationVersion: '0.23'

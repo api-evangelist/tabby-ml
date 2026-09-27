@@ -48,6 +48,11 @@ paths:
                 $ref: '#/components/schemas/ServerSetting'
 components:
   schemas:
+    ServerSetting:
+      type: object
+      properties:
+        disable_client_side_telemetry:
+          type: boolean
     HealthState:
       type: object
       properties:
@@ -60,11 +65,6 @@ components:
         chat_device:
           type: string
         webserver:
-          type: boolean
-    ServerSetting:
-      type: object
-      properties:
-        disable_client_side_telemetry:
           type: boolean
   securitySchemes:
     bearerAuth:

@@ -43,6 +43,9 @@ paths:
         '501':
           description: No completion model configured.
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
   schemas:
     CompletionResponse:
       type: object
@@ -61,6 +64,20 @@ components:
         debug_data:
           type: object
           description: Optional debug metadata (prompt, snippets) when debug is enabled.
+    Segments:
+      type: object
+      properties:
+        prefix:
+          type: string
+          description: Code before the cursor.
+        suffix:
+          type: string
+          description: Code after the cursor.
+        filepath:
+          type: string
+          description: Path of the file being edited.
+      required:
+      - prefix
     CompletionRequest:
       type: object
       properties:
@@ -77,23 +94,6 @@ components:
           type: number
           format: float
           description: Optional sampling temperature.
-    Segments:
-      type: object
-      properties:
-        prefix:
-          type: string
-          description: Code before the cursor.
-        suffix:
-          type: string
-          description: Code after the cursor.
-        filepath:
-          type: string
-          description: Path of the file being edited.
-      required:
-      - prefix
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
   securitySchemes:
     bearerAuth:
       type: http
