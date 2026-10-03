@@ -35,9 +35,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
   schemas:
     ModelRegistry:
       type: object
@@ -50,6 +47,9 @@ components:
           type: array
           items:
             type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
   securitySchemes:
     bearerAuth:
       type: http

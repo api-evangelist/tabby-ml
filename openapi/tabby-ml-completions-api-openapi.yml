@@ -43,27 +43,7 @@ paths:
         '501':
           description: No completion model configured.
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
   schemas:
-    CompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        choices:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              text:
-                type: string
-        debug_data:
-          type: object
-          description: Optional debug metadata (prompt, snippets) when debug is enabled.
     Segments:
       type: object
       properties:
@@ -94,6 +74,26 @@ components:
           type: number
           format: float
           description: Optional sampling temperature.
+    CompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              text:
+                type: string
+        debug_data:
+          type: object
+          description: Optional debug metadata (prompt, snippets) when debug is enabled.
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
   securitySchemes:
     bearerAuth:
       type: http
