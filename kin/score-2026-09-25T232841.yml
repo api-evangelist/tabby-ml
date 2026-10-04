@@ -1,22 +1,20 @@
-# Kin Score artifact — tabby-ml — 2026-08-25T154045
+# Kin Score artifact — tabby-ml — 2026-09-25T232841
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: tabby-ml
-  schema_version: 0.14.0
-  scored_at: '2026-08-25'
-  run_ts: 2026-08-25T154045
-  composite: 36.1
+  schema_version: 0.23.0
+  scored_at: '2026-09-25'
+  run_ts: 2026-09-25T232841
+  composite: 33.2
   band: thin
   facets:
-    discoverability: 64.8
-    contract_quality: 49.9
-    governance: 0.0
-    operational_transparency: 34.2
-    developer_ergonomics: 23.8
-    commercial_clarity: 39.5
+    discoverability: 57.1
+    contract_quality: 44.9
     contract_governance: 0.0
-    access_clarity: 39.5
+    operational_transparency: 31.1
+    developer_ergonomics: 32.1
+    access_clarity: 36.3
   agent_readiness:
     score: 19.8
     band: agent-aware
@@ -40,6 +38,12 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
+  regulatory:
+    applies: true
+    regime: Horizontal (data, software, accessibility, platform)
+    regime_id: horizontal
+    score: 10.9
+    matched_via: fallback
   provenance:
     agentic_access: derived
     contracts:
