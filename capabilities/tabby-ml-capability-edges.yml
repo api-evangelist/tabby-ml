@@ -1,0 +1,24 @@
+slug: tabby-ml
+provider: Tabby
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Events
+  spec_file: tabby-ml-events-api-openapi.yml
+  capability_id: BC-4280.10
+  capability_id_l1: BC-4280
+  capability_name: Product Telemetry Instrumentation
+  confidence: 0.7
+  evidence: 'POST /v1/events  event  Log a client telemetry event; schemas: LogEventRequest'
+  reason: Single endpoint that accepts client-emitted telemetry events, matching capture of product usage
+    events from client runtimes.

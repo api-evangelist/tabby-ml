@@ -212,6 +212,9 @@ apis:
   - type: Documentation
     url: https://tabby.tabbyml.com/docs/references/models-http-api/openai/
 common:
+- type: CapabilityMap
+  url: capabilities/tabby-ml-capability-edges.yml
+  name: Tabby Business Capability Map
 - type: AgenticAccess
   url: agentic-access/tabby-ml-agentic-access.yml
 - type: DomainSecurity
