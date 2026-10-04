@@ -37,6 +37,9 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
   schemas:
     IngestionRequest:
       type: object
@@ -62,9 +65,6 @@ components:
       - source
       - id
       - body
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
   securitySchemes:
     bearerAuth:
       type: http

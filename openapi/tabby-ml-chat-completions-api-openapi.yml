@@ -15,14 +15,14 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Chat
+- name: Chat Completions
   description: OpenAI-compatible chat completions and inline chat / Answer Engine.
 paths:
   /v1/chat/completions:
     post:
       operationId: chatCompletions
       tags:
-      - Chat
+      - Chat Completions
       summary: Chat completion (OpenAI-compatible)
       description: OpenAI-compatible chat completions. Streams responses as Server-Sent Events. Powers Tabby's inline chat and Answer Engine. Returns 501 when no chat model is configured.
       requestBody:
@@ -49,7 +49,7 @@ paths:
     post:
       operationId: chatCompletionsBeta
       tags:
-      - Chat
+      - Chat Completions
       summary: Chat completion (legacy alias)
       description: Backward-compatible alias of POST /v1/chat/completions.
       requestBody:
@@ -71,6 +71,20 @@ paths:
           description: No chat model configured.
 components:
   schemas:
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/ChatMessage'
     ChatCompletionRequest:
       type: object
       properties:
@@ -88,20 +102,6 @@ components:
           format: float
       required:
       - messages
-    ChatCompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        choices:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              message:
-                $ref: '#/components/schemas/ChatMessage'
     ChatMessage:
       type: object
       properties:

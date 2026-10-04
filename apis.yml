@@ -65,30 +65,6 @@ created: '2026-07-11'
 modified: '2026-07-11'
 specificationVersion: '0.23'
 apis:
-- aid: tabby-ml:tabby-ml-chat-api
-  name: Tabby Chat API
-  description: OpenAI-compatible chat completions and inline chat / Answer Engine.
-  humanURL: https://tabby.tabbyml.com/docs/api/
-  baseURL: http://localhost:8080
-  tags:
-  - Chat
-  properties:
-  - type: OpenAPI
-    url: openapi/tabby-ml-chat-api-openapi.yml
-  - type: Documentation
-    url: https://tabby.tabbyml.com/docs/welcome/
-  - type: APIReference
-    url: https://tabby.tabbyml.com/api/
-  - type: OpenCollection
-    url: collections/tabby-ml.opencollection.json
-  - type: PostmanCollection
-    url: collections/tabby-ml.postman_collection.json
-  - type: Documentation
-    url: https://tabby.tabbyml.com/docs/administration/answer-engine/
-  - type: Documentation
-    url: https://www.tabbyml.com/blog/doc-ingestion-api
-  - type: Documentation
-    url: https://tabby.tabbyml.com/docs/references/models-http-api/openai/
 - aid: tabby-ml:tabby-ml-completions-api
   name: Tabby Completions API
   description: Code completion endpoint powering Tabby's IDE plugins.
@@ -197,6 +173,30 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/tabby-ml-models-api-openapi.yml
+  - type: Documentation
+    url: https://tabby.tabbyml.com/docs/welcome/
+  - type: APIReference
+    url: https://tabby.tabbyml.com/api/
+  - type: OpenCollection
+    url: collections/tabby-ml.opencollection.json
+  - type: PostmanCollection
+    url: collections/tabby-ml.postman_collection.json
+  - type: Documentation
+    url: https://tabby.tabbyml.com/docs/administration/answer-engine/
+  - type: Documentation
+    url: https://www.tabbyml.com/blog/doc-ingestion-api
+  - type: Documentation
+    url: https://tabby.tabbyml.com/docs/references/models-http-api/openai/
+- aid: tabby-ml:tabby-ml-chat-completions-api
+  name: Tabby Chat Completions API
+  description: OpenAI-compatible chat completions and inline chat / Answer Engine.
+  humanURL: https://tabby.tabbyml.com/docs/api/
+  baseURL: http://localhost:8080
+  tags:
+  - Chat Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/tabby-ml-chat-completions-api-openapi.yml
   - type: Documentation
     url: https://tabby.tabbyml.com/docs/welcome/
   - type: APIReference

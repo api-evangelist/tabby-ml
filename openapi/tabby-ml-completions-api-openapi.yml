@@ -43,6 +43,9 @@ paths:
         '501':
           description: No completion model configured.
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
   schemas:
     Segments:
       type: object
@@ -58,22 +61,6 @@ components:
           description: Path of the file being edited.
       required:
       - prefix
-    CompletionRequest:
-      type: object
-      properties:
-        language:
-          type: string
-          description: Programming language identifier (e.g. python, rust, typescript).
-          example: python
-        segments:
-          $ref: '#/components/schemas/Segments'
-        user:
-          type: string
-          description: Optional opaque user identifier for telemetry.
-        temperature:
-          type: number
-          format: float
-          description: Optional sampling temperature.
     CompletionResponse:
       type: object
       properties:
@@ -91,9 +78,22 @@ components:
         debug_data:
           type: object
           description: Optional debug metadata (prompt, snippets) when debug is enabled.
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
+    CompletionRequest:
+      type: object
+      properties:
+        language:
+          type: string
+          description: Programming language identifier (e.g. python, rust, typescript).
+          example: python
+        segments:
+          $ref: '#/components/schemas/Segments'
+        user:
+          type: string
+          description: Optional opaque user identifier for telemetry.
+        temperature:
+          type: number
+          format: float
+          description: Optional sampling temperature.
   securitySchemes:
     bearerAuth:
       type: http
