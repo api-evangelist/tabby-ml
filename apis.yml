@@ -212,6 +212,8 @@ apis:
   - type: Documentation
     url: https://tabby.tabbyml.com/docs/references/models-http-api/openai/
 common:
+- type: Pricing
+  url: https://www.tabbyml.com/pricing
 - type: CapabilityMap
   url: capabilities/tabby-ml-capability-edges.yml
   name: Tabby Business Capability Map
