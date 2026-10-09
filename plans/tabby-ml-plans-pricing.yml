@@ -1,127 +1,134 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Tabby
-providerId: tabby-ml
-created: '2026-07-11'
-modified: '2026-07-11'
-reconciled: false
-tags:
-- AI Coding Assistant
-- Code Completion
-- Open Source
-- Developer Tools
-- Plans
-description: >-
-  Tabby has two consumption models. The core Tabby server is open source
-  (Apache-2.0) and completely free to self-host - there are no per-request or
-  per-token API fees, no usage limits, and no external calls to third parties;
-  your only cost is the infrastructure (CPU or GPU) you run it on. TabbyML also
-  sells hosted / managed plans: a free Community tier for up to 5 users, a Team
-  tier at 19 US dollars per seat per month for up to 50 users, and a custom
-  Enterprise tier for unlimited users with enhanced security and group
-  management. All tiers expose the same self-hostable server API surface.
-notes: >-
-  Pricing captured from the Tabby pricing page on 2026-07-11 and should be
-  verified during reconciliation. The self-hosted open-source server has no
-  vendor invoice; hosted Team/Enterprise plans add managed hosting,
-  administration, and support on top of the same API.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.tabbyml.com/pricing
 sources:
 - https://www.tabbyml.com/pricing
-- https://www.tabbyml.com/
-- https://github.com/TabbyML/tabby
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T112025
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+delivery:
+  delivery: open-core
+  method: page
+  read: '2026-10-07'
+  evidence: Community Perfect for individuals, freelancers, and small teams Free Open Source
+  free_edition: Community
+  managed_tier: Team
+published: true
+note: Page shows subscription tiers plus a separate annual-billing block and a usage-based Tabby Cloud
+  section with $20 free monthly credits. Community plan is free, open source, local deployment.
+plan_count: 7
+currency: USD
 plans:
-- id: tabby-open-source
-  name: Open Source (Self-Hosted)
-  type: free
-  description: >-
-    The full Tabby server, Apache-2.0 licensed and self-hostable via Docker on a
-    consumer-grade GPU or your own cloud. Includes code completion, chat
-    completions, the Answer Engine with doc ingestion, model registry, health,
-    and events endpoints. No API fees, no usage limits; you provide the
-    infrastructure.
-  entries:
-  - label: Self-Hosted Usage
-    name: self_hosted_usage
-    type: usage
-    metric: requests
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: free (self-hosted; you provide infrastructure)
-    userMultiplied: false
-  elements:
-  - name: Code Completion API
-  - name: Chat Completions API
-  - name: Answer Engine and Doc Ingestion
-  - name: Models, Health, and Events APIs
-  - name: No External Third-Party Calls
-- id: tabby-community
-  name: Community (Hosted)
-  type: free
-  description: >-
-    Free managed tier for up to 5 users with local-first deployment. Includes
-    code completion, Answer Engine, in-line chat, and context provider.
-  entries:
-  - label: Included Users
-    name: community_users
-    type: unit
-    metric: users
-    limit: 5
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: free up to 5 users
-    userMultiplied: false
-  elements:
-  - name: Code Completion
-  - name: Answer Engine
-  - name: In-line Chat
-  - name: Context Provider
-- id: tabby-team
-  name: Team (Hosted)
-  type: paid
-  description: >-
-    Managed tier for larger and growing development teams, up to 50 users, with
-    flexible deployment. Billed per seat.
-  entries:
-  - label: Per Seat
-    name: team_seat
-    type: flat
-    metric: seats
-    limit: 50
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: 19 USD per seat per month
-    userMultiplied: true
-  elements:
-  - name: Flexible Deployment
-  - name: Team Administration
-  - name: Everything in Community
-- id: tabby-enterprise
-  name: Enterprise
-  type: enterprise
-  description: >-
-    Custom plan for unlimited users with customized deployment, enhanced
-    security, and group management. Contact TabbyML for pricing.
-  entries:
-  - label: Enterprise Agreement
-    name: enterprise
-    type: flat
-    metric: contract
-    limit: -1
-    timeFrame: year
-    geo: global
-    unit: 1
-    price: contact sales
-    userMultiplied: false
-  elements:
-  - name: Unlimited Users
-  - name: Enhanced Security
-  - name: Group Management
-  - name: Customized Deployment
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+- name: Community
+  price_text: Free
+  period: month
+  unit: user
+  included_quota: Up to 5 users, Local deployment, Code Completion, Answer Engine, In-line chat & Context
+    Provider
+- name: Team
+  price_text: $19 /mo per seat
+  price: 19
+  currency: USD
+  period: month
+  unit: seat
+  included_quota: Up to 50 users, Flexible deployment
+- name: Enterprise
+  price_text: Custom
+  period: none
+  included_quota: Unlimited users, Customised deployment, Enhanced security and group management
+- name: Basic Plan (annual billing)
+  price_text: $180/yr
+  price: 180
+  currency: USD
+  period: year
+  included_quota: Real-time code analysis, Integrated code documentation, Collaboration tools
+- name: Business Plan (annual billing)
+  price_text: $280/yr
+  price: 280
+  currency: USD
+  period: year
+  included_quota: Advanced code suggestions, Priority email support, plus Basic features
+- name: Enterprise Plan (annual billing)
+  price_text: $480/yr
+  price: 480
+  currency: USD
+  period: year
+  included_quota: Priority email support, Advanced code suggestions, plus all features
+- name: Tabby Cloud Usage-Based (Pochi)
+  price_text: $20 in free monthly credits
+  price: 20
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: Bills based on token cost of LLMs; Tab Completion always free
+  overage: Billing happens automatically if usage exceeds $10, or at month-end for smaller amounts
+rate_limit_statements:
+- Tab Completion is always free. No usage limits, no restrictions. If usage is unusually high, we may
+  request a credit card to prevent abuse, but Tab Completion remains free.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - seat
+  - subscription
+  units:
+  - credit
+  - seat
+  plans:
+  - name: Community
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Team
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Basic Plan (annual billing)
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: Business Plan (annual billing)
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: Enterprise Plan (annual billing)
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: Tabby Cloud Usage-Based (Pochi)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
