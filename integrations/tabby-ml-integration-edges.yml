@@ -18,6 +18,45 @@ edges:
     detected: '2026-10-13'
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
+- partner_name: JetBrains Marketplace
+  partner: jetbrains
+  partner_match: aggregator
+  type: marketplace
+  marketplace: jetbrains
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://plugins.jetbrains.com/vendor/TabbyML
+  listing_count: 1
+  apps:
+  - Tabby
+  publisher_name: TabbyML
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+- partner_name: Visual Studio Code Marketplace
+  partner: vs-code-marketplace
+  partner_match: aggregator
+  type: marketplace
+  marketplace: vscode
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.visualstudio.com/publishers/TabbyML
+  listing_count: 1
+  apps:
+  - Tabby
+  publisher_name: TabbyML
+  badges:
+  - Verified publisher
+  - Verified domain
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 generated: '2026-10-13'
 method: searched
-checked: []
+checked:
+- https://marketplace.visualstudio.com/vscode
+- https://plugins.jetbrains.com/
+marketplace_apps: []
+source:
+- https://marketplace.visualstudio.com/vscode
+- https://plugins.jetbrains.com/
