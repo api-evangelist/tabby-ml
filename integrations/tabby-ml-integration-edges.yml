@@ -1,23 +1,4 @@
 edges:
-- partner_name: OpenAI
-  partner: openai
-  partner_match: domain
-  type: contract
-  channel: provider-built
-  relationship: compatible
-  direction: provider-built
-  evidence: https://github.com/api-evangelist/tabby-ml/blob/main/openapi/tabby-ml-chat-completions-api-openapi.yml#L19
-  contract_reference:
-    repo: tabby-ml
-    spec_file: tabby-ml-chat-completions-api-openapi.yml
-    property: description
-    value: OpenAI-compatible
-    note: 'tabby-ml declares OpenAI compatibility: ''description: OpenAI-compatible chat completions and inline
-      chat / Answer Engine.'''
-    detected_by: sweep-model-routing.py
-    detected: '2026-10-13'
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
 - partner_name: JetBrains Marketplace
   partner: jetbrains
   partner_match: aggregator
@@ -51,6 +32,25 @@ edges:
   - Verified domain
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+- partner_name: OpenAI
+  partner: openai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/api-evangelist/tabby-ml/blob/main/openapi/tabby-ml-chat-completions-api-openapi.yml#L19
+  contract_reference:
+    repo: tabby-ml
+    spec_file: tabby-ml-chat-completions-api-openapi.yml
+    property: description
+    value: OpenAI-compatible
+    note: 'tabby-ml declares OpenAI compatibility: ''description: OpenAI-compatible chat completions and inline
+      chat / Answer Engine.'''
+    detected_by: sweep-model-routing.py
+    detected: '2026-10-15'
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
 generated: '2026-10-13'
 method: searched
 checked:
