@@ -71,20 +71,6 @@ paths:
           description: No chat model configured.
 components:
   schemas:
-    ChatCompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        choices:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              message:
-                $ref: '#/components/schemas/ChatMessage'
     ChatCompletionRequest:
       type: object
       properties:
@@ -102,6 +88,20 @@ components:
           format: float
       required:
       - messages
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/ChatMessage'
     ChatMessage:
       type: object
       properties:

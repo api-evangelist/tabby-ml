@@ -11,16 +11,19 @@
     "tabby-ml-ingestion-api-openapi.yml",
     "tabby-ml-models-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "tabby-ml-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "superseded outputs removed: tabby-ml-chat-completions-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 6 total)"
   ],
   "skipped": [
-    "tabby-ml-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tabby-ml-chat-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "tabby-ml-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "tabby-ml-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "tabby-ml-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
